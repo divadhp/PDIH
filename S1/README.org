@@ -1,0 +1,9 @@
+#+TITLE: S1
+
+* Configuración de DOSBOX
+#+begin_src asm
+keyb sp
+mount C /home/divadhp/Universidad/PDIH/DOSBOX
+path=%path%;c:\bc/bin
+C:
+#+end_src
