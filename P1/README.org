@@ -1,0 +1,6 @@
+#+TITLE: P1
+
+* Ejercicio 1
+Se cambia el modo a 40x25 esperando la pulsación de una tecla para volver al modo original (80x25)
+
+./images/p1-e1.jpg
