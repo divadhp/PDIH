@@ -1,69 +1,64 @@
 pixel MACRO X, Y, C
-        push ax
-        push cx
-        push dx
+    push ax
+    push cx
+    push dx
+    
+    mov ax, Y
+    mov cx, X
+    mov dx, ax
+    mov al, C
+    mov ah, 0Ch
+    int 10h
 
-        mov ax, Y
-        mov cx, X
-        mov dx, ax
-        mov al, C
-        mov ah, 0Ch
-        int 10h
-
-        pop dx
-        pop cx
-        pop ax
-    ENDM
+    pop dx
+    pop cx
+    pop ax
+ENDM
 
 rectangulo MACRO x, y, w, h
 
-    ;; Pintar línea horizontal
+    mov cx, 0
+    mov dx, x	
+	bucle:
+    	pixel dx, y, 3
+    	inc dx	
+	    inc cx
+    	cmp cx, w
+	    jne bucle
 
     mov cx, 0
-    mov dx, x
-bucle:
-    pixel dx, y, 3
-    inc dx
-    inc cx
-    cmp cx, w
-    jne bucle
-
-    mov cx, 0
-    mov ax, y
-bucle1:
-    pixel dx, ax, 3
-    inc ax
-    inc cx
-    cmp cx, h
-    jne bucle1
+    mov ax, y	
+	bucle1:
+    	pixel dx, ax, 3
+	    inc ax
+    	inc cx
+	    cmp cx, h
+    	jne bucle1
 	
     mov cx, 0
-
-bucle2:
-    pixel dx, ax, 3
-    dec dx
-    inc cx
-    cmp cx, w
-    jne bucle2
+	bucle2:
+    	pixel dx, ax, 3
+	    dec dx
+	    inc cx
+	    cmp cx, w
+	    jne bucle2
 
     mov cx, 0
-bucle3:
-    pixel dx, ax, 3
-    dec ax
-    inc cx
-    cmp cx, h
-    jne bucle3
+	bucle3:
+	    pixel dx, ax, 3
+	    dec ax
+	    inc cx
+	    cmp cx, h
+	    jne bucle3
 
+	;; Añadir puntos al rectángulo 
+    add dx, 4
+    add ax, 3
+    pixel dx, ax, 1
 
-	add dx, 4
-	add ax, 3
-	pixel dx, ax, 1
-
-	add dx, 4
-	add ax, 3
-	pixel dx, ax, 2
-
-	
+    add dx, 4
+    add ax, 3
+    pixel dx, ax, 2    
 ENDM
 
     pila segment stack 'stack'
@@ -102,8 +97,6 @@ ENDM
 
             mov ax, 4C00h
             int 21h
-
-
 
         main ENDP
 
