@@ -8,3 +8,65 @@ En el caso de archlinux, la librería ncurses se instala con el siguiente comand
 #+end_src
 
 
+* Ejemplos
+Diversos ejemplos explicados en el seminario de ncurses.
+
+** Mostrar hola
+#+begin_src C
+#include <ncurses.h>
+
+int main() {
+
+    initscr();
+    printw("Hola");
+    refresh();
+    getch();
+    endwin();
+    
+    return 0;
+}
+#+end_src
+
+
+ * Ventana
+
+file:screenshots/ventana.png
+#+begin_src C
+#include <stdlib.h>
+#include <curses.h>
+
+int main(void) {
+    int rows, cols;
+    initscr();
+    noecho();
+    cbreak();
+    
+    
+    if (has_colors() == 0) {
+	endwin();
+	printf("El terminal no tiene soporte decolor\n");
+	exit(1);
+    }
+    start_color();
+    init_pair(1, COLOR_YELLOW, COLOR_GREEN);
+    init_pair(2, COLOR_BLACK, COLOR_WHITE);
+    init_pair(3,COLOR_WHITE,COLOR_BLUE);
+    clear();
+    
+    refresh();
+    getmaxyx(stdscr, rows, cols);
+    
+    WINDOW *window = newwin(rows,cols,0,0);
+    /* wbkgd(window, COLOR_PAIR(3)); */
+    box(window, '|', '-');
+    mvwprintw(window, 10, 10, "una cadena");	
+    wrefresh(window);
+    
+    getch();
+    endwin();
+    return 0;
+}
+#+end_src
+
+
+
