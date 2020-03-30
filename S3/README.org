@@ -1,0 +1,10 @@
+#+TITLE: S3 - ncurses
+
+* Instalación
+
+En el caso de archlinux, la librería ncurses se instala con el siguiente comando:
+#+begin_src bash
+  sudo pacman -S ncurses
+#+end_src
+
+
