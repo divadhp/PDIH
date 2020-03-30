@@ -8,7 +8,7 @@ En el caso de archlinux, la librería ncurses se instala con el siguiente comand
 #+end_src
 
 
-* Ejemplos
+ * Ejemplos
 Diversos ejemplos explicados en el seminario de ncurses.
 
 ** Mostrar hola
@@ -29,8 +29,8 @@ int main() {
 
 
  * Ventana
-
-file:screenshots/ventana.png
+#+caption: Ventana creada en ncurses
+[[file:screenshots/ventana.png]]
 #+begin_src C
 #include <stdlib.h>
 #include <curses.h>
