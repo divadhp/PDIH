@@ -113,6 +113,10 @@ int main(int argc, char *argv[]) {
 
 Utilizando ncurses se implementa el juego Pong en C.
 [[file:screenshots/pong.gif]]
+
+Para realizar la lectura del teclado se utiliza getch con nodelay para que no
+espere a que se presione una tecla antes de continuar. Con esto se consigue que
+el juego no se pare esperando la acción de un jugador.
 #+begin_src C
 #include <ncurses.h>
 #include <stdlib.h>
