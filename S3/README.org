@@ -11,7 +11,7 @@ En el caso de archlinux, la librería ncurses se instala con el siguiente comand
  * Ejemplos
 Diversos ejemplos explicados en el seminario de ncurses.
 
-** Mostrar hola
+ * Mostrar hola
 #+begin_src C
 #include <ncurses.h>
 
@@ -68,5 +68,44 @@ int main(void) {
 }
 #+end_src
 
+ * Pelotita
+
+   [[file:screenshots/pelotita.gif]]
+#+begin_src C
+#include <ncurses.h>
+#include <unistd.h>
+
+#define DELAY 30000
+
+int main(int argc, char *argv[]) {
+    int x = 0, y = 0;
+    int max_y = 50, max_x = 50;
+    int next_x = 0;
+    int direction = 1;
+
+    initscr();
+    noecho();
+    curs_set(FALSE);
+
+    start_color();
+    init_pair(1, COLOR_WHITE, COLOR_BLUE);
 
 
+    while (1) {
+        clear();
+        mvprintw(y, x, "o");
+        refresh();
+
+        usleep(DELAY);
+
+        next_x = x + direction;
+
+        if (next_x > max_x || next_x < 0) {
+            direction *= -1;
+        } else {
+            x += direction;
+        }
+    }
+    endwin();
+}
+#+end_src
