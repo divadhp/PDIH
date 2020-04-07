@@ -60,38 +60,38 @@ void setvideomode(unsigned char mode) {
 #+end_src
 
 
-
  * getvideomode
-   #+begin_src c
+#+begin_src c
 int getvideomode() {
     union REGS inregs, outregs;
     int86(0x10, &inregs, &outregs);
 
     return inregs.h.al;
 }
-   #+end_src
+#+end_src
 
    [[file:screenshots/getvideomode.png]]
 
 
  * textcolor
-   #+begin_src c
+#+begin_src c
 int COLOR = 0; // Inicializado a negro
 void textcolor(unsigned char c) {
     COLOR = c;
 }
 
-   #+end_src
-  * textbackground
-    #+begin_src c
+#+end_src
+ * textbackground
+
+#+begin_src c
 int BACKGROUND = 0;
 void textbackground(unsigned char c) {
     BACKGROUND = c;
 }
-    #+end_src
+#+end_src
 
  * cputchar
-   #+begin_src c
+#+begin_src c
 void cputchar(unsigned char c) {
     union REGS inregs, outregs;
     inregs.h.ah = 0x09;
@@ -102,12 +102,14 @@ void cputchar(unsigned char c) {
     int86(0x10, &inregs, &outregs);
 }
 
-   #+end_src
+#+end_src
 
    [[file:screenshots/cputchar.png]]
 
  * getche
-   #+begin_src c
+
+   Espera hasta que una tecla sea presionada y la imprime por pantalla.
+#+begin_src c
 void getche() {
     union REGS inregs, outregs;
     int caracter;
@@ -121,12 +123,12 @@ void getche() {
     inregs.h.al = caracter;
     int86(0x10, &inregs, &outregs);
 }
-   #+end_src
+#+end_src
  * clrscr
 
 Imprime un fin de línea por cada línea que tiene el modo actual.
 Posteriormente mueve el cursor a la posición 0-0.
-   #+begin_src c
+#+begin_src c
 int i = 0;
 void clrscr() {
     union REGS inregs, outregs;
@@ -138,4 +140,23 @@ void clrscr() {
     gotoxy(0, 0);
 }
 
-   #+end_src
+#+end_src
+
+* Ejercicios extra
+Se presentan 2 ejercicios extras para subir nota, siendo respectivamente:
+ - Dibujar un rectángulo para modo texto.
+ - El juego pong para modo vídeo.
+ * Rectángulo
+   Se incluye en el archivo [[file:main.c]]. Consiste en una función que dada la
+   esquina superior izquierda y la esquina inferior derecha dibuja un rectángulo
+   con los colores seleccionados. Se utiliza el caracter '|' para representar el
+   rectángulo en las columnas y '-' para las filas.
+
+   [[file:screenshots/box.png]]
+
+ * Pong
+   El juego clásico pong, donde una pelota se mueve y los jugadores controlan un
+   rectángulo con el que tienen que golpear la pelota.
+   Se incluye en el fichero [[file:pong.c]].
+
+   [[file:screenshots/pong.gif]]

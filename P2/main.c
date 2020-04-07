@@ -77,6 +77,7 @@ void clrscr() {
     for (i; i < inregs.h.al; i++) {
         printf("\n");
     }
+    gotoxy(0, 0);
 }
 
 void textcolor(unsigned char c) {
@@ -103,19 +104,41 @@ void pausa(){
    int86(0x16, &inregs, &outregs);
 }
 
+void box(int x_top, int y_top, int x_bot, int y_bot, int color, int bcolor) {
+    union REGS inregs, outregs;
+    int cols;
+    textcolor(color);
+    textbackground(bcolor);
+    int86(0x10, &inregs, &outregs);
+    cols = inregs.h.al;
+
+    for (i=0; i <= x_bot-x_top; i++) {
+        gotoxy(x_top+i, y_top);
+        cputchar('|');
+        gotoxy(x_top+i, y_bot);
+        cputchar('|');
+    }
+
+    for (i=1; i < y_bot-y_top; i++) {
+        gotoxy(x_top, y_top+i);
+        cputchar('-');
+        gotoxy(x_bot, y_top+i);
+        cputchar('-');
+    }
+    /* for (i = 0; i < cols; i++) { */
+    /*     cputchar('|'); */
+    /* } */
+
+}
 
 int main() {
-    clrscr();
+    //clrscr();
+    setvideomode(3);
+    box(0, 0, 10, 10, 1, 2);
     /* setvideomode(4); */
     /* getvideomode(); */
     /* pausa(); */
     /* setvideomode(3); */
-    gotoxy(0, 0);
-    textcolor(1);
-    textbackground(2);
-    cputchar('a');
-    pausa();
-    clrscr();
     pausa();
 
 
