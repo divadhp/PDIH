@@ -159,4 +159,38 @@ Se presentan 2 ejercicios extras para subir nota, siendo respectivamente:
    rectángulo con el que tienen que golpear la pelota.
    Se incluye en el fichero [[file:pong.c]].
 
+   Se utilizan algunas funciones adicionales a las pedidas en la práctica básica
+   como kbhit.
+   Esta función comprueba si se presiona una tecla. Se utiliza junto con getch
+   (función que espera que una tecla sea presionada), para obtener las acciones
+   sin parar el juego a la espera de una acción.
+
+   Al final se cambia el modo a texto y se escribe en pantalla el jugador que ha ganado.
+
+   #+begin_src c
+int kbhit() {
+    union REGS inregs, outregs;
+    int caracter;
+
+    inregs.h.ah = 11;
+    int86(0x21, &inregs, &outregs);
+
+    caracter = outregs.h.al;
+    return caracter;
+}
+
+   #+end_src
+   #+begin_src c
+int getch() {
+    union REGS inregs, outregs;
+    int caracter;
+
+    inregs.h.ah = 0;
+    int86(0x16, &inregs, &outregs);
+
+    caracter = outregs.h.al;
+    return caracter;
+}
+   #+end_src
+
    [[file:screenshots/pong.gif]]
