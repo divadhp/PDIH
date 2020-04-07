@@ -105,3 +105,37 @@ void cputchar(unsigned char c) {
    #+end_src
 
    [[file:screenshots/cputchar.png]]
+
+ * getche
+   #+begin_src c
+void getche() {
+    union REGS inregs, outregs;
+    int caracter;
+    inregs.h.ah = 1;
+    int86(0x21, &inregs, &outregs);
+
+    caracter = outregs.h.al;
+
+
+    inregs.h.ah = 9;
+    inregs.h.al = caracter;
+    int86(0x10, &inregs, &outregs);
+}
+   #+end_src
+ * clrscr
+
+Imprime un fin de línea por cada línea que tiene el modo actual.
+Posteriormente mueve el cursor a la posición 0-0.
+   #+begin_src c
+int i = 0;
+void clrscr() {
+    union REGS inregs, outregs;
+    int86(0x10, &inregs, &outregs);
+    i = 0;
+    for (i; i < inregs.h.al; i++) {
+        printf("\n");
+    }
+    gotoxy(0, 0);
+}
+
+   #+end_src

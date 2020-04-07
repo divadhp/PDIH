@@ -19,6 +19,22 @@ void gotoxy(int x, int y) {
 }
 
 
+void getche() {
+    union REGS inregs, outregs;
+    int caracter;
+    inregs.h.ah = 1;
+    int86(0x21, &inregs, &outregs);
+
+    caracter = outregs.h.al;
+   
+
+    inregs.h.ah = 9;
+    inregs.h.al = caracter;
+    int86(0x10, &inregs, &outregs);
+}
+
+
+
 void setcursortype(int tipo_cursor){
     union REGS inregs, outregs;
     inregs.h.ah = 0x01;
@@ -53,6 +69,15 @@ int getvideomode() {
 
     return inregs.h.al;
 }
+int i = 0;
+void clrscr() {
+    union REGS inregs, outregs;
+    int86(0x10, &inregs, &outregs);
+    i = 0;
+    for (i; i < inregs.h.al; i++) {
+        printf("\n");
+    }
+}
 
 void textcolor(unsigned char c) {
     COLOR = c;
@@ -80,12 +105,7 @@ void pausa(){
 
 
 int main() {
-    int i = 0;
-    int n = 200;
-    for (i; i < n; i++) {
-        printf("\n");
-    }
-   
+    clrscr();
     /* setvideomode(4); */
     /* getvideomode(); */
     /* pausa(); */
@@ -94,6 +114,8 @@ int main() {
     textcolor(1);
     textbackground(2);
     cputchar('a');
+    pausa();
+    clrscr();
     pausa();
 
 
