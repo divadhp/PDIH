@@ -42,13 +42,8 @@ void setcursortype(int tipo_cursor){
     int86(0x10, &inregs, &outregs);
 }
 #+end_src
- * Uso
-#+begin_src c
-setcursortype(INVISIBLE);
-#+end_src
 [[file:screenshots/cursortype.gif]]
  * setvideomode
-
 
 #+begin_src c
 void setvideomode(unsigned char mode) {
@@ -146,15 +141,45 @@ void clrscr() {
 Se presentan 2 ejercicios extras para subir nota, siendo respectivamente:
  - Dibujar un rectángulo para modo texto.
  - El juego pong para modo vídeo.
- * Rectángulo
+ *Rectángulo*
+
+
    Se incluye en el archivo [[file:main.c]]. Consiste en una función que dada la
    esquina superior izquierda y la esquina inferior derecha dibuja un rectángulo
    con los colores seleccionados. Se utiliza el caracter '|' para representar el
    rectángulo en las columnas y '-' para las filas.
 
+    #+begin_src c
+void box(int x_top, int y_top, int x_bot, int y_bot, int color, int bcolor) {
+    union REGS inregs, outregs;
+    int cols;
+    textcolor(color);
+    textbackground(bcolor);
+    int86(0x10, &inregs, &outregs);
+    cols = inregs.h.al;
+
+    for (i=0; i <= x_bot-x_top; i++) {
+        gotoxy(x_top+i, y_top);
+        cputchar('|');
+        gotoxy(x_top+i, y_bot);
+        cputchar('|');
+    }
+
+    for (i=1; i < y_bot-y_top; i++) {
+        gotoxy(x_top, y_top+i);
+        cputchar('-');
+        gotoxy(x_bot, y_top+i);
+        cputchar('-');
+    }
+}
+    #+end_src
+
+
    [[file:screenshots/box.png]]
 
- * Pong
+ *Pong*
+
+
    El juego clásico pong, donde una pelota se mueve y los jugadores controlan un
    rectángulo con el que tienen que golpear la pelota.
    Se incluye en el fichero [[file:pong.c]].
