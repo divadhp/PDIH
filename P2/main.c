@@ -44,6 +44,13 @@ void setvideomode(unsigned char mode) {
 }
 
 
+int getvideomode() {
+    union REGS inregs, outregs;
+    int86(0x10, &inregs, &outregs);
+
+    return inregs.h.al;
+}
+
 void pausa(){
    union REGS inregs, outregs;
    inregs.h.ah = 0x00;
@@ -55,13 +62,15 @@ int main() {
     int i = 0;
     int n = 200;
     for (i; i < n; i++) {
-	printf("\n");
+        printf("\n");
     }
-
+   
     setvideomode(4);
+    getvideomode();
     pausa();
     setvideomode(3);
     gotoxy(10, 0);
+    printf("Prueba gotoxy");
     pausa();
 
 
