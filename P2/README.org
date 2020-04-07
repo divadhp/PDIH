@@ -49,6 +49,18 @@ setcursortype(INVISIBLE);
 [[file:screenshots/cursortype.gif]]
  * setvideomode
 
+
+#+begin_src c
+void setvideomode(unsigned char mode) {
+   union REGS inregs, outregs;
+   inregs.h.al = mode;
+   inregs.h.ah = 0x00;
+   int86(0x10, &inregs, &outregs);
+}
+#+end_src
+
+
+
  * getvideomode
    #+begin_src c
 int getvideomode() {
@@ -60,3 +72,36 @@ int getvideomode() {
    #+end_src
 
    [[file:screenshots/getvideomode.png]]
+
+
+ * textcolor
+   #+begin_src c
+int COLOR = 0; // Inicializado a negro
+void textcolor(unsigned char c) {
+    COLOR = c;
+}
+
+   #+end_src
+  * textbackground
+    #+begin_src c
+int BACKGROUND = 0;
+void textbackground(unsigned char c) {
+    BACKGROUND = c;
+}
+    #+end_src
+
+ * cputchar
+   #+begin_src c
+void cputchar(unsigned char c) {
+    union REGS inregs, outregs;
+    inregs.h.ah = 0x09;
+    inregs.h.al = c;
+    inregs.h.bl = BACKGROUND << 4 | COLOR;
+    inregs.h.bh = 0x00;
+    inregs.x.cx = 1;
+    int86(0x10, &inregs, &outregs);
+}
+
+   #+end_src
+
+   [[file:screenshots/cputchar.png]]

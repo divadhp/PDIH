@@ -5,6 +5,9 @@ int INVISIBLE = 0;
 int NORMAL = 1;
 int GRUESO = 2;
 
+int BACKGROUND = 0;
+int COLOR = 0;
+
 void gotoxy(int x, int y) {
     union REGS inregs, outregs;
 
@@ -51,6 +54,24 @@ int getvideomode() {
     return inregs.h.al;
 }
 
+void textcolor(unsigned char c) {
+    COLOR = c;
+}
+
+void textbackground(unsigned char c) {
+    BACKGROUND = c;
+}
+
+void cputchar(unsigned char c) {
+    union REGS inregs, outregs;
+    inregs.h.ah = 0x09;
+    inregs.h.al = c;
+    inregs.h.bl = BACKGROUND << 4 | COLOR;
+    inregs.h.bh = 0x00;
+    inregs.x.cx = 1;
+    int86(0x10, &inregs, &outregs);
+}
+
 void pausa(){
    union REGS inregs, outregs;
    inregs.h.ah = 0x00;
@@ -65,12 +86,14 @@ int main() {
         printf("\n");
     }
    
-    setvideomode(4);
-    getvideomode();
-    pausa();
-    setvideomode(3);
-    gotoxy(10, 0);
-    printf("Prueba gotoxy");
+    /* setvideomode(4); */
+    /* getvideomode(); */
+    /* pausa(); */
+    /* setvideomode(3); */
+    gotoxy(0, 0);
+    textcolor(1);
+    textbackground(2);
+    cputchar('a');
     pausa();
 
 
