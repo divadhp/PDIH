@@ -1,6 +1,6 @@
 #+TITLE: P2
 
-* Funciones 
+* Funciones básicas
  * gotoxy
 #+begin_src c
 void gotoxy(int x, int y) {
