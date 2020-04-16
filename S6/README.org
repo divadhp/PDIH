@@ -11,10 +11,12 @@ para el script.
 
 - Se dibuja la forma de la onda de ambos sonidos
 #+CAPTION: Onda de perro.wav
+#+NAME: fig:perro-onda
 [[file:screenshots/perro-onda.png]]
 
 
 #+CAPTION: Onda de gato.mp3
+#+NAME: fig:gato-onda
 [[file:screenshots/gato-onda.png]]
 
 - Información de las cabeceras
