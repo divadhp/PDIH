@@ -24,9 +24,11 @@ para el script.
 
   Al leer el archivo de sonido, este se puede imprimir para obtener los datos de
   cabecera:
+  - Cabecera de perro.wav
   #+CAPTION: Cabecera de perro.wav
   [[file:screenshots/perro-header.png]]
 
+  - Cabecera de gato.mp3
   #+CAPTION: Cabecera de gato.mp3
   [[file:screenshots/gato-header.png]]
 
