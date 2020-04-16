@@ -10,11 +10,12 @@ Se usan los archvios [[file:sonidos/perro.wav]] y [[file:sonidos/gato.mp3]] como
 para el script.
 
 - Se dibuja la forma de la onda de ambos sonidos
+  - Onda de perro.wav
 #+CAPTION: Onda de perro.wav
 #+NAME: fig:perro-onda
 [[file:screenshots/perro-onda.png]]
 
-
+  - Onda de gato.mp3
 #+CAPTION: Onda de gato.mp3
 #+NAME: fig:gato-onda
 [[file:screenshots/gato-onda.png]]
