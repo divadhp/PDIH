@@ -1,0 +1,36 @@
+#+TITLE: S2
+
+Añadir al path el directorio bin de Borland C.
+#+begin_src asm
+mount C /home/divadhp/Universidad/PDIH/DOSBOX
+path=%path%;c:\bc/bin
+C:
+#+end_src
+
+
+Función para cambiar modo de vídeo.
+#+begin_src c
+void setvideomode(unsigned char mode) {
+   union REGS inregs, outregs;
+   inregs.h.al = mode;
+   inregs.h.ah = 0x00;
+   int86(0x10, &inregs, &outregs);
+}
+#+end_src
+
+Función para detectar una pulsación de tecla y mostrarla por pantalla.
+#+begin_src c
+void getchar() {
+    union REGS inregs, outregs;
+    int caracter;
+
+    inregs.h.ah = 1;
+    int86(0x21, &inregs, &outregs);
+    caracter = outregs.h.al;
+    inregs.h.ah = 9;
+    inregs.h.al = caracter;
+    int86(0x10, &inregs, &outregs);
+
+}
+
+#+end_src
