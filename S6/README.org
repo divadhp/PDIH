@@ -1,0 +1,61 @@
+#+TITLE: S6
+
+* Introducción
+Seminario de manipulación de sonido utilizando R. Para el script en R se utiliza
+el reproductor [[https://mpv.io][MPV]] para reproducir el sonido.
+
+* Script
+
+Se usan los archvios [[file:sonidos/perro.wav]] y [[file:sonidos/gato.mp3]] como sonidos
+para el script.
+
+- Se dibuja la forma de la onda de ambos sonidos
+#+CAPTION: Onda de perro.wav
+[[file:screenshots/perro-onda.png]]
+
+
+#+CAPTION: Onda de gato.mp3
+[[file:screenshots/gato-onda.png]]
+
+- Información de las cabeceras
+
+  Al leer el archivo de sonido, este se puede imprimir para obtener los datos de
+  cabecera:
+  #+CAPTION: Cabecera de perro.wav
+  [[file:screenshots/perro-header.png]]
+
+  #+CAPTION: Cabecera de gato.mp3
+  [[file:screenshots/gato-header.png]]
+
+
+Otra forma de mostrar la cabecera sería utilizando el parámetro de la función
+readWave (en el caso del formato Wav), header = TRUE.
+
+#+begin_src R
+headers <- readWave('perro.wav', header = TRUE)
+#+end_src
+
+- Unión de ambos sonidos
+  #+CAPTION: Onda del sonido resultante
+  [[file:screenshots/sonido-onda.png]]
+
+
+- Filtro por frecuencia
+
+  Se puede filtrar el sonido por frecuencia con la función bwfilter indicando el
+  rango desde el que filtra hasta el que filtra.
+
+  Posteriormente se guarda el sonido obteniendo el archivo [[file:mezcla.wav]]
+- Grabar sonido
+
+  Para grabar un archivo de 2 segundos se escoge una frecuencia (por
+  ejemplo 8000) y se graban 16000 muestras (tiempo x frecuencia)
+
+  #+begin_src R
+s <- record(16000, 8000, 1)
+wait(s)
+x <- s$data
+close(s); rm(s)
+
+listen(x, f=8000)
+  #+end_src
