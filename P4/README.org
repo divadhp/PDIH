@@ -1,0 +1,77 @@
+#+TITLE: Práctica 4: Sonido
+
+* Introducción
+Seminario de manipulación de sonido utilizando R. Para el script en R se utiliza
+el reproductor [[https://mpv.io][MPV]] para reproducir el sonido.
+
+* Script
+
+Se usan los archvios [[file:sonidos/perro.wav]] y [[file:sonidos/gato.mp3]] como sonidos
+para el script.
+
+- Se dibuja la forma de la onda de ambos sonidos
+  - Onda de perro.wav
+#+CAPTION: Onda de perro.wav
+#+NAME: fig:perro-onda
+[[file:screenshots/perro-onda.png]]
+
+  - Onda de gato.mp3
+#+CAPTION: Onda de gato.mp3
+#+NAME: fig:gato-onda
+[[file:screenshots/gato-onda.png]]
+
+- Información de las cabeceras
+
+  Al leer el archivo de sonido, este se puede imprimir para obtener los datos de
+  cabecera:
+  - Cabecera de perro.wav
+  #+CAPTION: Cabecera de perro.wav
+  [[file:screenshots/perro-header.png]]
+
+  - Cabecera de gato.mp3
+  #+CAPTION: Cabecera de gato.mp3
+  [[file:screenshots/gato-header.png]]
+
+
+Otra forma de mostrar la cabecera sería utilizando el parámetro de la función
+readWave (en el caso del formato Wav), header = TRUE.
+
+#+begin_src R
+headers <- readWave('perro.wav', header = TRUE)
+#+end_src
+
+- Unión de ambos sonidos
+  #+CAPTION: Onda del sonido resultante
+  [[file:screenshots/sonido-onda.png]]
+
+
+- Filtro por frecuencia
+
+  Se puede filtrar el sonido por frecuencia con la función bwfilter indicando el
+  rango desde el que filtra hasta el que filtra.
+
+  Posteriormente se guarda el sonido obteniendo el archivo [[file:sonidos/mezcla.wav]]
+- Aplicar eco
+    Para aplicar eco a un sonido se utiliza la función echo de seawave, esta
+  función tiene el parámetro amp y delay. El primero es utilizado para indicar
+  la amplitud de onda del eco (1 valor por cada eco realizado) y el segundo
+  indica el momento en el que se reproduce el eco.
+
+  Para este ejemplo se utiliza el archivo de sonido [[file:sonidos/hola.wav]]
+
+  #+begin_src R
+s <- echo(hola, hola@samp.rate, amp=c(1, 0.4, 0.2), delay=c(1, 2, 3), output = "Wave")
+  #+end_src
+
+  Para poder guardar el sonido resultante, hay que usar el parámetro output de
+  la función para indicar el formato Wave o devolverá una matriz.
+
+- Invertir sonido
+
+  Para invertir un sonido se aplica la función revw, hay que indicar el archivo
+  de sonido, su frecuencia (obtenida con sonido@samp.rate) e indicar el formato
+  de salida (en mi caso Wave) para posteriormente poder guardar el archivo.
+
+  #+begin_src R
+s <- revw(s, f=s@samp.rate, output = "Wave")
+  #+end_src
