@@ -100,3 +100,36 @@ Para este programa se realizan dos bucles, uno para cada dirección en la que se
 encienden las luces.
 
 [[file:screenshots/coche-fantástico.gif]]
+* Ejercicio 4
+
+Para este ejercicio se realiza un programa que funcione como alarma de detección
+por presencia. Se emplea el sensor PIR, el cual detecta un objeto próximo a este
+y un LED que se enciende cuando el sensor detecta un objeto dentro de su rango.
+
+
+#+begin_src C
+ void setup()
+{
+  pinMode(13, OUTPUT);
+  pinMode(2, INPUT);
+}
+
+int val;
+
+void loop()
+{
+
+  val = digitalRead(2);
+
+  if (val == HIGH) {
+  	digitalWrite(13, HIGH);
+    delay(50);
+    digitalWrite(13, LOW);
+  }
+}
+#+end_src
+
+Para este ejercicio, se conecta el LED al pin número 13 y el sensor como input
+al pin 2.
+
+[[file:screenshots/sensor.gif]]
