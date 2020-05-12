@@ -61,3 +61,42 @@ void loop()
 
 
 [[file:screenshots/arduino-pulsador.gif]]
+
+
+* Ejercicio 3: El coche fantástico
+
+Para este ejercicio se realiza un programa con 4 LEDs con un comportamiento
+similar al presentado por las luces del coche fantástico.
+
+#+begin_src C
+void setup()
+{
+  pinMode(13, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(10, OUTPUT);
+}
+
+void loop()
+{
+  for (int i = 13; i > 10; i--) {
+  	digitalWrite(i, HIGH);
+    delay(200);
+    digitalWrite(i, LOW);
+    delay(200);
+  }
+
+  for (int i = 10; i < 13; i++) {
+  	digitalWrite(i, HIGH);
+    delay(200);
+    digitalWrite(i, LOW);
+    delay(200);
+  }
+
+}
+#+end_src
+
+Para este programa se realizan dos bucles, uno para cada dirección en la que se
+encienden las luces.
+
+[[file:screenshots/coche-fantástico.gif]]
