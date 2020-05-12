@@ -1,0 +1,63 @@
+#+TITLE: P3. Arduino
+
+
+* Ejercicio 1
+
+Se implementa un programa de parpadeo de LED, que encienda y apague 3 LEDs con
+un intervalo de 1.5 segundos.
+
+Para este programa se utilizan los pines 13, 12 y 11 para los LEDs.
+
+El programa consiste en encender todos los LEDs y posteriormente apagar todos
+los LEDs. Tras cada acción se aplica un retraso (delay) de 1.5 segundos.
+
+#+begin_src C
+ void setup()
+{
+  pinMode(13, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
+}
+
+void loop()
+{
+  digitalWrite(13, HIGH);
+  digitalWrite(12, HIGH);
+  digitalWrite(11, HIGH);
+  delay(1500);
+  digitalWrite(13, LOW);
+  digitalWrite(12, LOW);
+  digitalWrite(11, LOW);
+  delay(1500);
+}
+#+end_src
+
+
+* Ejercicio 2
+
+Para este ejercicio se realiza un programa que tras accionar un pulsador se
+enciende una luz roja y se apagan 2 luces (amarilla y verde) que previamente
+estaban encendidad. Se considera que cuando se suelte el pulsador, se vuelve al
+estado inicial.
+
+#+begin_src C
+void setup()
+{
+  pinMode(13, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(7, INPUT);
+}
+
+void loop()
+{
+  int val;
+  val = digitalRead(7);
+  digitalWrite(13, !val);
+  digitalWrite(12, val);
+  digitalWrite(11, val);
+}
+#+end_src
+
+
+[[file:screenshots/arduino-pulsador.gif]]
