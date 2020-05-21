@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <RelativeLayout
+            android:id="@+id/X"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="X: "/>
+            <TextView
+                android:layout_toRightOf="@id/textX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewX"
+                android:text="N/A"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/X"
+            android:id="@+id/Y"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Y: "/>
+            <TextView
+                android:layout_toRightOf="@id/textY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewY"
+                android:text="N/A"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/Y"
+            android:id="@+id/Z"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textZ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Z: "/>
+            <TextView
+                android:layout_toRightOf="@id/textZ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewZ"
+                android:text="N/A"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/Z"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textAcc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aceleración: "/>
+            <TextView
+                android:layout_toRightOf="@id/textAcc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewAcc"
+                android:text="N/A"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

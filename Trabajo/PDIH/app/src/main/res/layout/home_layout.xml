@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/accelerometerButton"
+            android:text="Acelerómetro"
+            android:background="@color/colorPrimary"
+            android:textColor="#FFF"/>
+
+        <Button
+            android:layout_below="@+id/accelerometerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearAccelButton"
+            android:text="Aceleracón Lineal"
+            android:background="@color/colorPrimary"
+            android:textColor="#FFF"/>
+
+        <Button
+            android:layout_below="@+id/linearAccelButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/location"
+            android:text="Localización"
+            android:background="@color/colorPrimary"
+            android:textColor="#FFF"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
